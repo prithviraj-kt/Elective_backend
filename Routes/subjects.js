@@ -84,7 +84,7 @@ router.post(
 );
 
 router.post(
-  "/updatesubject/:id",
+  "/updatesubject/:id/:subid",
   [
     body("_id", "ID cannot be blank").exists(),
     body("courseTitle", "courseTitle cannot be blank").exists(),
@@ -107,7 +107,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const id = req.params.id;
+    const id = req.params.subid;
 
     const {
       courseTitle,
@@ -192,7 +192,6 @@ router.get("/getallsubjects/:branch/:id", async (req, res) => {
       msg: "User does not exits",
     });
   }
-
   try {
     const getSubjects = await SUBJECT.find({ branch });
     res.json(getSubjects);
@@ -230,4 +229,17 @@ router.get("/getsubject/:branch/:id/:subid", async (req, res) => {
     });
   }
 });
+
+router.get('/getSubject/:ele/:sub', async (req, res) => {
+
+  const ele = req.params.ele;
+
+  const sub = req.params.sub;
+
+  const books = await REGISTRATION.find({[ele]:sub}).count();
+
+  res.json(books);
+
+})
+
 module.exports = router;

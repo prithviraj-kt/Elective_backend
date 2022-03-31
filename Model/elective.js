@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const registrationSchema = mongoose.Schema({
+const electiveSchema = mongoose.Schema({
   _id: String,
   name: String,
   branch: String,
@@ -10,19 +10,20 @@ const registrationSchema = mongoose.Schema({
   prof1Confirm: { type: String, default: "" },
   prof2: { type: String, default: "" },
   prof2Confirm: { type: String, default: "" },
-  open1: { type: String, default: "" },
-  open1Confirm: { type: String, default: "" },
-  open2: { type: String, default: "" },
-  open2Confirm: { type: String, default: "" },
   prof3: { type: String, default: "" },
   prof3Confirm: { type: String, default: "" },
   prof4: { type: String, default: "" },
   prof4Confirm: { type: String, default: "" },
+  open1: { type: String, default: "" },
+  open1Confirm: { type: String, default: "" },
+  open2: { type: String, default: "" },
+  open2Confirm: { type: String, default: "" },
+  
 
   password: String,
   cpassword: String,
 });
 
-const registration = mongoose.model("REGISTRATION", registrationSchema);
+const elective = mongoose.model("ELECTIVE", electiveSchema);
 
-module.exports = registration;
+module.exports = elective;

@@ -15,6 +15,4 @@ router.get("/profile/:usn", async (req, res) => {
   }
 });
 
-
-
 module.exports = router;

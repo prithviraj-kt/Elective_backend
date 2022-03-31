@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const REGISTRATION = require("../Model/registration");
+const SUBJECT = require("../Model/subjects");
+
 const { body, validationResult } = require("express-validator");
 
 router.post(
@@ -17,8 +19,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const usn = req.params.usn
-    const { name, email, phone, branch } = req.body;
+    const usn = req.params.usn;
+    const userData = req.body;
 
     const existUser = await REGISTRATION.findById(usn);
 
@@ -28,24 +30,29 @@ router.post(
       });
     }
 
-    const newUser = await REGISTRATION.replaceOne(
-      { _id: usn },
-      {
-        name,
-        email,
-        phone,
-        branch,
-        prof:existUser.prof,
-        open1: existUser.open1,
-        open2: existUser.open2,
-        password: existUser.password,
-        cpassword: existUser.cpassword
-      }
-    );
+    const newUser = await REGISTRATION.replaceOne({ _id: usn }, userData);
     res.json({
       msg: "User updated successfully",
     });
   }
 );
+
+router.post("/subject/:usn", async (req, res) => {
+  const user = req.body;
+
+  const usn = req.params.usn;
+  try {
+    const newUser = await REGISTRATION.replaceOne({ _id: usn }, user);
+
+    const updateSubject = await SUBJECT
+    req.json({
+      msg: "Success",
+    });
+  } catch (error) {
+    res.json({
+      msg: "Failed update",
+    });
+  }
+});
 
 module.exports = router;

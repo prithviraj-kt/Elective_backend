@@ -15,6 +15,8 @@ app.use('/', require("./Routes/profile"))
 app.use('/', require("./Routes/electives"))
 app.use('/', require("./Routes/edit"))
 app.use('/', require("./Routes/subjects"))
+app.use('/', require("./Routes/hod"))
+
 
 
 
